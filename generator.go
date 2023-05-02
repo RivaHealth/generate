@@ -328,11 +328,6 @@ func (g *Generator) getSchemaName(keyName string, schema *Schema) string {
 func getGolangName(s string) string {
 	buf := bytes.NewBuffer([]byte{})
 
-	if s[0] == '_' {
-		// Go variables are allowed to start with an underscore and an underscore at the beginning does not indicate snake_casing
-		buf.WriteRune('_')
-	}
-
 	for i, v := range splitOnAll(s, isNotAGoNameCharacter) {
 		if i == 0 && strings.IndexAny(v, "0123456789") == 0 {
 			// Go types are not allowed to start with a number, lets prefix with an underscore.
@@ -340,6 +335,12 @@ func getGolangName(s string) string {
 		}
 		buf.WriteString(capitaliseFirstLetter(v))
 	}
+
+	if s[0] == '_' {
+		// Go variables are allowed to start with an underscore and an underscore at the beginning does not indicate snake_casing
+		buf.WriteRune('_')
+	}
+
 	return buf.String()
 }
 

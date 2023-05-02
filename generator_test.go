@@ -525,9 +525,9 @@ func TestThatJavascriptKeyNamesCanBeConvertedToValidGoNames(t *testing.T) {
 			expected:    "KeyName",
 		},
 		{
-			description: "Underscores at the beginning are preserved.",
+			description: "Underscores at the beginning are put at the end.",
 			input:       "_key",
-			expected:    "_Key",
+			expected:    "Key_",
 		},
 		{
 			description: "Periods are stripped.",
